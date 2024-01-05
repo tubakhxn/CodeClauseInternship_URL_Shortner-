@@ -1,0 +1,17 @@
+# package
+node_modules
+jspm_packages
+
+# serverless
+.serverless
+
+# user
+config.json
+project.txt
+static/index.html
+
+build/
+
+.env
+.env.*
+!.env.example
