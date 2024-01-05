@@ -1,7 +1,7 @@
 {
-  "name": "serverless-url-shortener",
+  "name": "CodeClauseInternship_URL_Shortner-",
   "version": "1.0.0",
-  "author": "Daniel Ireson",
+  "author": "Tuba Khan",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf ./build/ && mkdir -p ./build/ && cp -R ./public/ ./build/ && node scripts/build-template.js",
