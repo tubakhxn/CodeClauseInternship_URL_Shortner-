@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #f4f4f4;
+    }
+
+    #shorten-form {
+      max-width: 400px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin: 5px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      width: calc(100% - 16px);
+      border-radius: 4px;
+    }
+
+    #short-url {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="shorten-form">
+    <h2>URL Shortener</h2>
+    <form>
+      <label for="original-url">Enter URL:</label>
+      <input type="url" id="original-url" placeholder="https://example.com" required>
+      <button type="button" onclick="shortenUrl()">Shorten URL</button>
+    </form>
+
+    <div id="short-url"></div>
+  </div>
+
+  <script>
+    async function shortenUrl() {
+      const originalUrl = document.getElementById('original-url').value;
+      const apiUrl = 'https://your-shortening-service.com/shorten';
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ originalUrl }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          displayShortUrl(data.shortUrl);
+        } else {
+          throw new Error('Failed to shorten URL');
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+        displayShortUrl('Error occurred while shortening URL.');
+      }
+    }
+
+    function displayShortUrl(shortUrl) {
+      const shortUrlElement = document.getElementById('short-url');
+      shortUrlElement.innerHTML = `Shortened URL: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+    }
+  </script>
+
+</body>
+</html>

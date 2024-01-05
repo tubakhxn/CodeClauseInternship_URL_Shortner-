@@ -1,0 +1,15 @@
+
+Resources:
+  ClientDistributionRecordSetGroup:
+    Type: AWS::Route53::RecordSetGroup
+    DependsOn:
+      - ClientDistribution
+    Properties:
+      HostedZoneId: !Ref DomainNameHostedZoneId
+      RecordSets:
+        - Name: !Ref DomainName
+          Type: A
+          AliasTarget:
+          
+            HostedZoneId: Z2FDTNDATAQYW2
+            DNSName: !GetAtt ClientDistribution.DomainName
